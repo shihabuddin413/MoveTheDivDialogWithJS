@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dragable div</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<!-- <link rel="stylesheet" type="text/css" href="boxicons.min.css"> -->
+</head>
+<body>
+	<div class="wrapper">
+		<header>Draggable Div</header>
+		<div class="content">
+			<div class="icon"><i class="bx bx-move">+</i></div>
+			<div class="title">Draggable Div</div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit</p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		const wrapper = document.querySelector(".wrapper")
+		header = wrapper.querySelector("header")
+
+		function onDrag ({movementX, movementY}) {
+			let getStyle = window.getComputedStyle(wrapper);
+			let left = parseInt(getStyle.left);
+			let top  = parseInt(getStyle.top);
+			console.log(left, top)
+			wrapper.style.left = `${left + movementX}px`;
+			wrapper.style.top  = `${top + movementY}px`;
+ 		}
+
+		header.addEventListener("mousedown",  ()=>{
+			header.classList.add("active")
+			header.addEventListener("mousemove", onDrag);
+		});
+		document.addEventListener("mouseup",  ()=>{
+			header.classList.remove("active")
+			header.removeEventListener("mousemove", onDrag);
+		});
+	</script>
+</body>
+</html>
